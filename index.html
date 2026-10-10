@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MineCoder: Алгоритмы Ботов</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="image/icon-192.png">
+    <link rel="apple-touch-icon" href="image/icon-192.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Шапка -->
+        <header>
+            <div class="stats-bar">
+                <span class="stat-item pixel-font" id="user-level">УРОВЕНЬ: 1</span>
+                <span class="stat-item pixel-font" id="user-xp-text">XP: 0/100</span>
+            </div>
+            <div class="xp-container">
+                <div class="xp-bar" id="xp-indicator"></div>
+                <div class="xp-text pixel-font">ОПЫТ</div>
+            </div>
+        </header>
+
+        <!-- ЭКРАН 1: СТАРТОВЫЙ -->
+        <div id="screen-start" class="screen active">
+            <div class="logo-container">
+                <img src="image/icon-192.png" alt="MineCoder Logo" onerror="this.onerror=null; this.src='https://img.icons8.com/color/144/minecraft-logo.png'">
+            </div>
+            <div class="title-block">
+                <h1 class="main-title">MINECODER</h1>
+                <p class="subtitle-text">Алгоритмы Ботов</p>
+            </div>
+            <div class="story-box">
+                <p>Привет! Готов создать своего первого программируемого бота в Minecraft? Пройди 5 модулей, выполни 15 практических заданий, заработай XP и стань Мастером Кода!</p>
+            </div>
+            <div class="action-block">
+                <button id="btn-start-game" class="mc-btn">НАЧАТЬ ИГРУ</button>
+                <button id="pwa-install-btn" class="mc-btn pwa-hidden">УСТАНОВИТЬ PWA</button>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 2: ВВОДНЫЙ СЦЕНАРИЙ -->
+        <div id="screen-intro" class="screen">
+            <h2 class="screen-title">КАК ИГРАТЬ?</h2>
+            <div class="story-box flex-grow">
+                <p class="margin-b-15">🤖 <strong>Твой бот</strong> — это исполнитель. Он делает только то, что написано в коде, строго по шагам.</p>
+                <p class="margin-b-15">📜 <strong>Правила просты:</strong><br>
+                1. Читай короткую теорию.<br>
+                2. Выполняй практические задания на каждом уроке.<br>
+                3. Получай XP за правильные ответы.<br>
+                4. Открывай уникальные ачивки (значки)!</p>
+                <p>При ошибке ты всегда сможешь попробовать снова. Удачи!</p>
+            </div>
+            <div>
+                <button id="btn-intro-next" class="mc-btn">ПОНЯТНО, В БОЙ!</button>
+            </div>
+        </div>
+
+        <!-- УРОК 1: СОФТ И ПРОЕКТ -->
+        <div id="screen-lesson1" class="screen">
+            <h2 class="lesson-title">УРОК 1: СОФТ И ПРОЕКТ</h2>
+            <div class="lesson-card">
+                <h3>ТЕОРИЯ</h3>
+                <p>Создаем на диске папку, например mineflayer-bot.Для создания бота нам нужны две вещи: <strong>Node.js</strong> (движок для запуска JavaScript) и библиотека <strong>Mineflayer</strong> (готовый набор команд для управления ботом).</p>
+                <p>Затем мы инициализируем проект командой <code>npm init -y</code>, а затем устанавливаем саму библиотеку mineflayer в папку проекта с помощью <code>npm install mineflayer.</code>.</p>
+            </div>
+
+            <!-- ЗАДАНИЕ 1.1 -->
+            <div class="task-container">
+                <div class="task-title pixel-font">ЗАДАНИЕ 1/3: УСТАНОВИ БИБЛИОТЕКУ</div>
+                <p class="task-descr">Какую команду нужно ввести в терминале VS Code, чтобы установить Mineflayer в проект?</p>
+                <div class="code-fill">
+                    npm <select id="task1-1-select" class="code-select">
+                        <option value="">-- выбери --</option>
+                        <option value="init">init</option>
+                        <option value="install">install</option>
+                        <option value="run">run</option>
+                    </select> mineflayer
+                </div>
+                <button id="btn-check-1-1" class="mc-btn reset-btn">ПРОВЕРИТЬ</button>
+                <div id="feedback-1-1" class="feedback-box"></div>
+            </div>
+
+            <!-- ЗАДАНИЕ 1.2 -->
+            <div class="task-container">
+                <div class="task-title pixel-font">ЗАДАНИЕ 2/3: СОБЕРИ КОМАНДУ</div>
+                <p class="task-descr">Кликни по блокам в правильном порядке (клик по блоку вверху отменяет выбор):</p>
+                <div class="sequence-slots" id="seq-slots-1-2">
+                    <span id="seq-placeholder-1-2">Кликай по блокам внизу</span>
+                </div>
+                <div class="sequence-pool" id="seq-pool-1-2">
+                    <div class="seq-block" data-step="npm">npm</div>
+                    <div class="seq-block" data-step="init">init</div>
+                    <div class="seq-block" data-step="-y">-y</div>
+                </div>
+                <button id="btn-check-1-2" class="mc-btn reset-btn">ПРОВЕРИТЬ</button>
+                <div id="feedback-1-2" class="feedback-box"></div>
+            </div>
+
+            <!-- ЗАДАНИЕ 1.3 -->
+            <div class="task-container">
+                <div class="task-title pixel-font">ЗАДАНИЕ 3/3: ТЕРМИНЫ</div>
+                <p class="task-descr">Что делает команда <code>npm install</code>?</p>
+                <div id="options-container-1-3">
+                    <div class="option-item" data-opt="opt-1">а) Создаёт файл package.json</div>
+                    <div class="option-item" data-opt="opt-2">б) Скачивает зависимости и сохраняет их в node_modules</div>
+                    <div class="option-item" data-opt="opt-3">в) Запускает скрипт из package.json</div>
+                </div>
+                <button id="btn-check-1-3" class="mc-btn reset-btn">ПРОВЕРИТЬ</button>
+                <div id="feedback-1-3" class="feedback-box"></div>
+            </div>
+
+            <div class="btn-group">
+                <button id="next-1" class="mc-btn disabled" disabled>СЛЕДУЮЩИЙ УРОК</button>
+            </div>
+        </div>
+
+        <!-- УРОК 2: ЗАПУСК И ПОДКЛЮЧЕНИЕ -->
+        <div id="screen-lesson2" class="screen">
+            <h2 class="lesson-title">УРОК 2: ЗАПУСК И ПОДКЛЮЧЕНИЕ</h2>
+            <div class="lesson-card">
+                <h3>ТЕОРИЯ</h3>
+                <p>Чтобы бот зашёл в твой мир, нужно запустить Minecraft, открыть мир для сети (<strong>Esc → Открыть для сети</strong>) и скопировать пятизначный <strong>порт</strong> из чата.</p>
+                <p>Этот порт обязательно нужно прописать в коде в объекте <code>createBot</code> как число, иначе бот не подключится!</p>
+                <p>Вот так должен выглядить код! <code>
+                    const bot = mineflayer.createBot({</code>
+  
+                  <p> <code> host: 'localhost',          // адрес сервера </code></p>
+  
+                  <p> <code>  port: 54321,                // порт из LAN (замени на свой!) </code></p>
+  
+                   <p> <code>username: 'MyBot',          // ник бота</code></p>
+  
+                  <p> <code>  version: '1.20.1'  });         // версия Minecraft (должна совпадать с сервером)</code></p>
+ </p>
+
+  <p>Запустим бота в терминале <code>node index.js
+</code></p>
+            </div>
+
+            <!-- ЗАДАНИЕ 2.1 -->
+            <div class="task-container">
+                <div class="task-title pixel-font">ЗАДАНИЕ 1/3: АЛГОРИТМ LAN</div>
+                <p class="task-descr">Расположи шаги открытия мира для сети в правильном порядке:</p>
+                <div class="sequence-slots" id="seq-slots-2-1">
+                    <span id="seq-placeholder-2-1">Кликай по шагам</span>
+                </div>
+                <div class="sequence-pool" id="seq-pool-2-1">
+                    <div class="seq-block" data-step="esc">Нажми Esc в игре</div>
+                    <div class="seq-block" data-step="open-lan">Выбери «Открыть для сети»</div>
+                    <div class="seq-block" data-step="copy-port">Скопируй порт из чата</div>
+                </div>
+                <button id="btn-check-2-1" class="mc-btn reset-btn">ПРОВЕРИТЬ</button>
+                <div id="feedback-2-1" class="feedback-box"></div>
+            </div>
+
+            <!-- ЗАДАНИЕ 2.2 -->
+            <div class="task-container">
+                <div class="task-title pixel-font">ЗАДАНИЕ 2/3: РАЗБОР КОДА</div>
+                <p class="task-descr">В этом фрагменте кода есть проблема. Найди её:</p>
+                <pre><code>const mineflayer = require('mineflayer');
+const bot = mineflayer.createBot({
+  host: 'localhost',
+  port: '12345',
+  username: 'BotName'
+});</code></pre>
+                <div id="options-container-2-2">
+                    <div class="option-item" data-opt="opt-1">а) Не хватает require('mineflayer')</div>
+                    <div class="option-item" data-opt="opt-2">б) Порт передан строкой '12345', а должен быть числом 12345</div>
+                    <div class="option-item" data-opt="opt-3">в) Ошибка в параметре host — нужен IP-адрес, а не localhost</div>
+                </div>
+                <button id="btn-check-2-2" class="mc-btn reset-btn">ПРОВЕРИТЬ</button>
+                <div id="feedback-2-2" class="feedback-box"></div>
+            </div>
+
+            <!-- ЗАДАНИЕ 2.3 -->
+            <div class="task-container" id="task-container-2-3">
+                <div class="task-title pixel-font">ЗАДАНИЕ 3/3: ПАРЫ ПАРАМЕТРОВ</div>
+                <p class="task-descr">Выбери термин слева, затем подходящее описание справа:</p>
+                <div class="match-interactive-container">
+                    <div class="match-column" id="terms-2-3">
+                        <div class="match-item term" data-key="host">host</div>
+                        <div class="match-item term" data-key="port">port</div>
+                        <div class="match-item term" data-key="username">username</div>
+                    </div>
+                    <div class="match-column" id="defs-2-3">
+                        <div class="match-item def" data-key="port">Номер порта для подключения</div>
+                        <div class="match-item def" data-key="username">Имя бота в игре</div>
+                        <div class="match-item def" data-key="host">Адрес сервера (например, localhost)</div>
+                    </div>
+                </div>
+                <div id="feedback-2-3" class="feedback-box"></div>
+            </div>
+
+            <div class="btn-group">
+                <button id="next-2" class="mc-btn disabled" disabled>СЛЕДУЮЩИЙ УРОК</button>
+            </div>
+        </div>
+
+        <!-- УРОК 3: КОД И ОШИБКИ -->
+        <div id="screen-lesson3" class="screen">
+            <h2 class="lesson-title">УРОК 3: КОД И ОШИБКИ</h2>
+            <div class="lesson-card">
+                <h3>ТЕОРИЯ</h3>
+                <p>Когда бот успешно заходит в мир, срабатывает событие <code>'spawn'</code>. В этот момент мы вызываем метод <code>bot.chat()</code>.</p>
+                <p>Если в консоли появляется <code>Error: connect ECONNREFUSED</code> — бот не смог подключиться (сервер не запущен или неверный порт).</p>
+            </div>
+
+            <!-- ЗАДАНИЕ 3.1 -->
+            <div class="task-container">
+                <div class="task-title pixel-font">ЗАДАНИЕ 1/3: ПРИЧИНА ОШИБКИ</div>
+                <p class="task-descr">Бот упал с ошибкой <code>connect ECONNREFUSED</code>. Что произошло?</p>
+                <div id="options-container-3-1">
+                    <div class="option-item" data-opt="opt-1">а) На компьютере не установлен VS Code</div>
+                    <div class="option-item" data-opt="opt-2">б) Неверно указан порт или мир в Minecraft не открыт для сети</div>
+                    <div class="option-item" data-opt="opt-3">в) У бота слишком длинный ник (username)</div>
+                </div>
+                <button id="btn-check-3-1" class="mc-btn reset-btn">ПРОВЕРИТЬ</button>
+                <div id="feedback-3-1" class="feedback-box"></div>
+            </div>
+
+            <!-- ЗАДАНИЕ 3.2 -->
+            <div class="task-container">
+                <div class="task-title pixel-font">ЗАДАНИЕ 2/3: ЗАПОЛНИ ПРОПУСКИ</div>
+                <p class="task-descr">Допиши код, чтобы бот поздоровался после спавна:</p>
+                <pre><code>bot.on('<span id="gap-3-2-1" class="gap-highlight">___</span>', () => {
+  <span id="gap-3-2-2" class="gap-highlight">___</span>('Привет, мир Minecraft!');
+});</code></pre>
+                <div class="gaps-selector-box">
+                    <select id="gap-select-3-2-1" class="code-select">
+                        <option value="">-- событие --</option>
+                        <option value="spawn">spawn</option>
+                        <option value="login">login</option>
+                    </select>
+                    <select id="gap-select-3-2-2" class="code-select">
+                        <option value="">-- метод --</option>
+                        <option value="bot.chat">bot.chat</option>
+                        <option value="console.log">console.log</option>
+                    </select>
+                </div>
+                <button id="btn-check-3-2" class="mc-btn reset-btn">ПРОВЕРИТЬ</button>
+                <div id="feedback-3-2" class="feedback-box"></div>
+            </div>
+
+            <!-- ЗАДАНИЕ 3.3 -->
+            <div class="task-container">
+                <div class="task-title pixel-font">ЗАДАНИЕ 3/3: ЛОГ КОНСОЛИ</div>
+                <p class="task-descr">Бот успешно подключился и написал в чат. Какой вывод НЕ появится в консоли Node.js при нормальной работе?</p>
+                <div id="options-container-3-3">
+                    <div class="option-item" data-opt="opt-1">а) [13:45:01] [Bot]: Привет, мир Minecraft!</div>
+                    <div class="option-item" data-opt="opt-2">б) Error: connect ECONNREFUSED</div>
+                    <div class="option-item" data-opt="opt-3">в) Bot connected successfully</div>
+                </div>
+                <button id="btn-check-3-3" class="mc-btn reset-btn">ПРОВЕРИТЬ</button>
+                <div id="feedback-3-3" class="feedback-box"></div>
+            </div>
+
+            <div class="btn-group">
+                <button id="next-3" class="mc-btn disabled" disabled>СЛЕДУЮЩИЙ УРОК</button>
+            </div>
+        </div>
+
+        <!-- УРОК 4: КОМАНДЫ БОТА -->
+        <div id="screen-lesson4" class="screen">
+            <h2 class="lesson-title">УРОК 4: КОМАНДЫ БОТА</h2>
+            <div class="lesson-card">
+                <h3>ТЕОРИЯ</h3>
+                <p>Бот может ходить, писать в чат и взаимодействовать с миром. Все действия выполняются строго по порядку, как в алгоритме.</p>
+                <p>Свойства объекта хранят состояние (например, координаты <code>bot.entity.position</code>), а вызовы методов отдают боту прямые команды.</p>
+            </div>
+
+            <!-- ЗАДАНИЕ 4.1 -->
+            <div class="task-container">
+                <div class="task-title pixel-font">ЗАДАНИЕ 1/3: АЛГОРИТМ БОТА</div>
+                <p class="task-descr">Расположи команды в правильном порядке, чтобы бот поздоровался, пошёл вперёд и активировал блок:</p>
+                <div class="sequence-slots" id="seq-slots-4-1">
+                    <span id="seq-placeholder-4-1">Кликай по командам</span>
+                </div>
+                <div class="sequence-pool" id="seq-pool-4-1">
+                    <div class="seq-block" data-step="chat">bot.chat('Привет!')</div>
+                    <div class="seq-block" data-step="move">bot.setControlState('forward', true)</div>
+                    <div class="seq-block" data-step="activate">bot.activateBlock()</div>
+                </div>
+                <button id="btn-check-4-1" class="mc-btn reset-btn">ПРОВЕРИТЬ</button>
+                <div id="feedback-4-1" class="feedback-box"></div>
+            </div>
+
+            <!-- ЗАДАНИЕ 4.2 -->
+            <div class="task-container">
+                <div class="task-title pixel-font">ЗАДАНИЕ 2/3: ГДЕ ОШИБКА?</div>
+                <p class="task-descr">В коде бот пытается открыть сундук до того, как приблизился к нему. Почему скрипт выдаст ошибку?</p>
+                <pre><code>bot.activateBlock(chestBlock);
+bot.setControlState('forward', true);</code></pre>
+                <div id="options-container-4-2">
+                    <div class="option-item" data-opt="opt-1">а) Бот не может взаимодействовать с блоками вне радиуса досягаемости</div>
+                    <div class="option-item" data-opt="opt-2">б) Команда activateBlock не существует</div>
+                    <div class="option-item" data-opt="opt-3">в) Нужно сначала перезагрузить Minecraft</div>
+                </div>
+                <button id="btn-check-4-2" class="mc-btn reset-btn">ПРОВЕРИТЬ</button>
+                <div id="feedback-4-2" class="feedback-box"></div>
+            </div>
+
+            <!-- ЗАДАНИЕ 4.3 -->
+            <div class="task-container">
+                <div class="task-title pixel-font">ЗАДАНИЕ 3/3: СВОЙСТВА И МЕТОДЫ</div>
+                <p class="task-descr">Выбери подходящие слова, чтобы код логически стал корректным:</p>
+                <pre><code>// 1. Получаем свойство позиции
+const pos = bot.<span id="gap-4-3-1" class="gap-highlight">___</span>;
+
+// 2. Метод перемещения бота
+bot.<span id="gap-4-3-2" class="gap-highlight">___</span>(pos.x + 1, pos.y, pos.z);
+
+// 3. Отправка строки в чат
+bot.<span id="gap-4-3-3" class="gap-highlight">___</span>('Я на месте!');</code></pre>
+                <div class="gaps-selector-box">
+                    <select id="gap-select-4-3-1" class="code-select">
+                        <option value="">-- свойство --</option>
+                        <option value="entity.position">entity.position</option>
+                        <option value="getPosition">getPosition()</option>
+                    </select>
+                    <select id="gap-select-4-3-2" class="code-select">
+                        <option value="">-- перемещение --</option>
+                        <option value="lookAt">lookAt</option>
+                        <option value="moveTo">moveTo</option>
+                    </select>
+                    <select id="gap-select-4-3-3" class="code-select">
+                        <option value="">-- чат --</option>
+                        <option value="chat">chat</option>
+                        <option value="say">say</option>
+                    </select>
+                </div>
+                <button id="btn-check-4-3" class="mc-btn reset-btn">ПРОВЕРИТЬ</button>
+                <div id="feedback-4-3" class="feedback-box"></div>
+            </div>
+
+            <div class="btn-group">
+                <button id="next-4" class="mc-btn disabled" disabled>СЛЕДУЮЩИЙ УРОК</button>
+            </div>
+        </div>
+
+        <!-- УРОК 5: ОТЛАДКА И СОБЫТИЯ -->
+        <div id="screen-lesson5" class="screen">
+            <h2 class="lesson-title">УРОК 5: ОТЛАДКА И СОБЫТИЯ</h2>
+            <div class="lesson-card">
+                <h3>ТЕОРИЯ</h3>
+                <p>События — это реакции на действия в игре. Бот слушает их через метод <code>bot.on('имяСобытия', callback)</code>.</p>
+                <ul>
+                    <li><code>'spawn'</code> — сущность бота готова к командам</li>
+                    <li><code>'message'</code> / <code>'chat'</code> — пришло сообщение в чат</li>
+                    <li><code>'health'</code> — изменился голод или очки здоровья</li>
+                </ul>
+            </div>
+
+            <!-- ЗАДАНИЕ 5.1 -->
+            <div class="task-container" id="task-container-5-1">
+                <div class="task-title pixel-font">ЗАДАНИЕ 1/3: СОБЫТИЯ БОТА</div>
+                <p class="task-descr">Сопоставь событие слева с его назначением справа:</p>
+                <div class="match-interactive-container">
+                    <div class="match-column" id="terms-5-1">
+                        <div class="match-item term" data-key="spawn">'spawn'</div>
+                        <div class="match-item term" data-key="message">'message'</div>
+                        <div class="match-item term" data-key="health">'health'</div>
+                    </div>
+                    <div class="match-column" id="defs-5-1">
+                        <div class="match-item def" data-key="health">Изменилось здоровье или голод бота</div>
+                        <div class="match-item def" data-key="spawn">Бот появился в игровом мире</div>
+                        <div class="match-item def" data-key="message">В чат пришло сообщение от игроков/сервера</div>
+                    </div>
+                </div>
+                <div id="feedback-5-1" class="feedback-box"></div>
+            </div>
+
+            <!-- ЗАДАНИЕ 5.2 -->
+            <div class="task-container">
+                <div class="task-title pixel-font">ЗАДАНИЕ 2/3: ТИПЫ ДАННЫХ В СОБЫТИЯХ</div>
+                <p class="task-descr">В событии message параметр <code>jsonMsg</code> приходит как объект. Какая строчка вызовет ошибку?</p>
+                <pre><code>bot.on('message', (jsonMsg) => {
+  // Вызов метода строкового поиска напрямую у объекта:
+  if (jsonMsg.includes('привет')) {
+    bot.chat('Привет!');
+  }
+});</code></pre>
+                <div id="options-container-5-2">
+                    <div class="option-item" data-opt="opt-1">а) Ошибки нет, метод includes работает с любыми типами данных</div>
+                    <div class="option-item" data-opt="opt-2">б) jsonMsg — это сложный объект (Chat), нужно применить jsonMsg.toString()</div>
+                    <div class="option-item" data-opt="opt-3">в) Нельзя писать условия if внутри bot.on</div>
+                </div>
+                <button id="btn-check-5-2" class="mc-btn reset-btn">ПРОВЕРИТЬ</button>
+                <div id="feedback-5-2" class="feedback-box"></div>
+            </div>
+
+            <!-- ЗАДАНИЕ 5.3 -->
+            <div class="task-container">
+                <div class="task-title pixel-font">ЗАДАНИЕ 3/3: СБОРКА АЛГОРИТМА</div>
+                <p class="task-descr">Выстрой логический порядок алгоритма для скрипта-автоответчика:</p>
+                <div class="sequence-slots" id="seq-slots-5-3">
+                    <span id="seq-placeholder-5-3">Кликай по шагам</span>
+                </div>
+                <div class="sequence-pool" id="seq-pool-5-3">
+                    <div class="seq-block" data-step="listen">Слушаем событие чата (bot.on)</div>
+                    <div class="seq-block" data-step="check">Проверяем текст сообщения на команду</div>
+                    <div class="seq-block" data-step="reply">Отправляем ответ через bot.chat()</div>
+                    <div class="seq-block" data-step="log">Записываем событие в консоль (console.log)</div>
+                </div>
+                <button id="btn-check-5-3" class="mc-btn reset-btn">ПРОВЕРИТЬ</button>
+                <div id="feedback-5-3" class="feedback-box"></div>
+            </div>
+
+            <div class="btn-group">
+                <button id="next-5" class="mc-btn disabled" disabled>ЗАВЕРШИТЬ КУРС</button>
+            </div>
+        </div>
+
+        <!-- ЭКРАН: ФИНАЛЬНЫЙ -->
+        <div id="screen-final" class="screen">
+            <div class="center-content">
+                <h2 class="final-title">КУРС ЗАВЕРШЁН!</h2>
+                <div class="story-box">
+                    <p class="congrats-text">🎉 Поздравляем! 🎉</p>
+                    <p>Ты освоил структуру пакетов, подключение по сети, управление сущностью и работу с событиями Node.js + Mineflayer!</p>
+                </div>
+                <h3 class="rewards-title">ТВОИ ЗНАЧКИ:</h3>
+                <div class="badge-grid">
+                    <div class="badge-card" id="badge-1">
+                        <div class="badge-icon">👶</div>
+                        <div class="badge-name">Новичок</div>
+                    </div>
+                    <div class="badge-card" id="badge-2">
+                        <div class="badge-icon">🧩</div>
+                        <div class="badge-name">Сетевик</div>
+                    </div>
+                    <div class="badge-card" id="badge-3">
+                        <div class="badge-icon">🔄</div>
+                        <div class="badge-name">Связист</div>
+                    </div>
+                    <div class="badge-card" id="badge-4">
+                        <div class="badge-icon">🎮</div>
+                        <div class="badge-name">Оператор</div>
+                    </div>
+                    <div class="badge-card" id="badge-5">
+                        <div class="badge-icon">🏆</div>
+                        <div class="badge-name">Мастер Кода</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button id="btn-restart" class="mc-btn">ПРОЙТИ ЗАНОВО</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
